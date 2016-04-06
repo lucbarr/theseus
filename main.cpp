@@ -10,10 +10,14 @@ using namespace std;
 
 const int MAX_SIZE = 10;
 
-void printMap(string map[MAX_SIZE], int rows);
+void printMap(string map[MAX_SIZE], int rows){
+	for (int j=0 ; j < rows ; ++j){
+		cout << map[j] << endl;
+	}
+}
 
 int main (){
-	Pos startPos, endPos;
+	Pos startpos, endpos;
 	ifstream mapfile;
 	string map[MAX_SIZE];
 	int i= 0;
@@ -21,22 +25,17 @@ int main (){
 	while (!mapfile.eof()){
 		getline(mapfile,map[i]);
 		if(map[i].find_first_of("i") != string::npos){
-			startPos.x = i;
-			startPos.y = map[i].find_first_of("i");
+			startpos.x = i;
+			startpos.y = map[i].find_first_of("i");
 		}
 		if(map[i].find_first_of("@") != string::npos){
-			endPos.x = i;
-			endPos.y = map[i].find_first_of("@");
+			endpos.x = i;
+			endpos.y = map[i].find_first_of("@");
 		}
 		i++;
 	}
-	printMap (map, i);
-	cout << startPos.x << " , " << startPos.y << endl;
-	cout << endPos.x << " , " << endPos.y << endl;
+	printMap(map, i);
+	cout << startpos.x << " , " << startpos.y << endl;
+	cout << endpos.x << " , " << endpos.y << endl;
 }
 
-void printMap(string map[MAX_SIZE], int rows){
-	for (int j=0 ; j < rows ; ++j){
-		cout << map[j] << endl;
-	}
-}
