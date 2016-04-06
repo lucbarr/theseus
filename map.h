@@ -26,19 +26,17 @@ public:
 
 	bool isEnd (Pos position) { return ((position.x == endpos_.x) && (position.y == endpos_.y)); }
 	bool isStart (Pos position) { return ((position.x == startpos_.x) && (position.y == startpos_.y)); }
+	bool isValid (Pos position) { return (map_[position.x].at(position.y) == '.'); }
 
 	int getNofRows() { return n_of_rows_; }
 	Pos getStartPos() { return startpos_; }
 	Pos getEndPos() { return endpos_; }
-	
-	void printMap();
-};
 
-
-void Map::printMap(){
+	void printMap(){
 	for (int j=0 ; j < n_of_rows_ ; ++j){
 		std::cout << map_[j] << std::endl;
 	}
 }
+};
 
 #endif 

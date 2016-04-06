@@ -8,6 +8,12 @@ struct Pos{
 	int x,y;
 };
 
+
+const Pos NORTH = {0,-1};
+const Pos SOUTH = {0,1};
+const Pos EAST = {1,0};
+const Pos WEST = {-1,0};
+
 const float CROSSOVER_RATE = 0.7;
 const float MUTATION_RATE = 0.002;
 const unsigned int POP_SIZE = 50;

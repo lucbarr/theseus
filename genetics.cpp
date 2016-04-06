@@ -5,6 +5,8 @@
 #include <string.h>
 
 #include "util.h"
+#include "map.h"
+#include "genetics.h"
 
 #define RANDOM_NUM ((float)rand()/(RAND_MAX+1.0))
 
@@ -69,6 +71,24 @@ std::string generateRandomBits(int length){
 	return bits;
 }
 
+float evaluateFitness (Map map, std::string bits){
+	Pos individual_pos = map.getStartPos();
+	int current_gene = 0;
+	Pos direction;
+	for (int i = 0 ; i < CHROMO_LENGTH ; i+=GENE_LENGTH){
+		current_gene = bin2Dec(bits.substr(i,GENE_LENGTH));
+		direction.x = decodeDirection(current_gene).x + individual_pos.x;
+		direction.y = decodeDirection(current_gene).y + individual_pos.y;
+		if (map.isValid(direction)){
+			individual_pos.x = direction.x;
+			individual_pos.y = direction.y;
+		}
+		if (map.isEnd(individual_pos)){
+			return 999.0f;
+		}
+	}
+}
+
 void printGeneSymbol(int val){
 	switch(val){
 		case 0:
@@ -94,4 +114,17 @@ void printChromo(std::string bits){ //prints chromossomes
 	}
 	std::cout << "\n";
 	return ;
+}
+
+Pos decodeDirection(int val){
+	switch(val){
+		case 0:
+			return SOUTH;
+		case 1:
+			return WEST;
+		case 2:
+			return NORTH;
+		case 3:
+			return EAST;
+	}
 }
