@@ -3,34 +3,33 @@
 #include <string>
 
 #include "util.h"
+#include "map.h"
 
 using namespace std;
-
-const int MAX_SIZE = 10;
-
-void printMap(string map[MAX_SIZE], int rows){
-	for (int j=0 ; j < rows ; ++j){
-		cout << map[j] << endl;
-	}
-}
 
 int main (){
 	Pos startpos, endpos;
 	ifstream mapfile;
-	string map[MAX_SIZE];
+	Map map;
 	int i= 0;
 	mapfile.open ("map.txt");
 	while (!mapfile.eof()){
-		getline(mapfile,map[i]);
-		if(map[i].find_first_of("i") != string::npos){
+		getline(mapfile, map.map_[i]);
+		if(map.map_[i].find_first_of("i") != string::npos){
 			startpos.x = i;
-			startpos.y = map[i].find_first_of("i");
+			startpos.y = map.map_[i].find_first_of("i");
+			map.setStartPos(startpos);
 		}
-		if(map[i].find_first_of("@") != string::npos){
+		if(map.map_[i].find_first_of("@") != string::npos){
 			endpos.x = i;
-			endpos.y = map[i].find_first_of("@");
+			endpos.y = map.map_[i].find_first_of("@");
+			map.setEndPos(endpos);
 		}
 		i++;
 	}
-}
+	map.setNofRows(i);
+	map.printMap();	
+	printPos(map.getEndPos());
+	printPos(map.getStartPos());
 
+}

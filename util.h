@@ -2,6 +2,7 @@
 #define UTIL_H
 
 #include <string>
+#include <iostream>
 
 struct Pos{
 	int x,y;
@@ -14,5 +15,9 @@ const unsigned int CHROMO_LENGTH = 128;
 const unsigned int GENE_LENGTH = 2;
 const unsigned int MAX_ALLOWABLE_GENERATIONS = 1000;
 const unsigned int BUFF_MAX = 256;
+
+inline void printPos(Pos position){
+	std::cout << "( " <<  position.x << " , " << position.y << " )" << std::endl;
+}
 
 #endif

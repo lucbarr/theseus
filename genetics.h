@@ -1,12 +1,12 @@
 #ifndef GENETICS_H
 #define GENETICS_H
 
-int bin2Dec(string bits);
+int bin2Dec(std::string bits);
 
-void mutate(string &bits);
-void crossover(string &child1,string &child2);
-string generateRandomBits(int length);
+void mutate(std::string &bits);
+void crossover(std::string &child1,std::string &child2);
+std::string generateRandomBits(int length);
 void printGeneSymbol(int val);
-void printChromo(string bits);
+void printChromo(std::string bits);
 
 #endif

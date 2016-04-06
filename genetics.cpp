@@ -6,7 +6,7 @@
 
 #include "util.h"
 
-#define RANDOM_NUM_ ((float)rand()/(RAND_MAX+1.0))
+#define RANDOM_NUM ((float)rand()/(RAND_MAX+1.0))
 
 int bin2Dec(std::string bits){
 	int value = 0;
@@ -29,7 +29,7 @@ otherwise everytime we run, we increase the chaotic level
 void mutate(std::string &bits){
 	srand(time(NULL));
 	for (int i=0; i<bits.length();++i){ //must: test backwards run fx
-		if (RANDOM_NUM_<= MUTATION_RATE){ //must: test diff between < and <=
+		if (RANDOM_NUM<= MUTATION_RATE){ //must: test diff between < and <=
 			if (bits.at(i) == '1')
 				bits.at(i) = '0';
 			else
@@ -42,8 +42,8 @@ void mutate(std::string &bits){
 
 void crossover(std::string &child1,std::string &child2){
 	srand(time(NULL));
-	if(RANDOM_NUM_> CROSSOVER_RATE){
-		int crosspoint = (RANDOM_NUM_)*(CHROMO_LENGTH);
+	if(RANDOM_NUM> CROSSOVER_RATE){
+		int crosspoint = (RANDOM_NUM)*(CHROMO_LENGTH);
 		std::string temp1;
 		std::string temp2;
 		temp1 = child1.substr(0,crosspoint) + child2.substr(crosspoint,CHROMO_LENGTH);
@@ -59,7 +59,7 @@ std::string generateRandomBits(int length){
 	srand(time(NULL));
 	std::string bits;
 	for (int i=0;i<length;++i){
-		if (RANDOM_NUM_>0.5f){
+		if (RANDOM_NUM>0.5f){
 			bits+="0"; //concatenate 0
 		}
 		else{

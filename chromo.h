@@ -1,6 +1,7 @@
-#include <string.h>
 #ifndef CHROMO_H
 #define CHROMO_H
+
+#include <string.h>
 
 struct ChromoType{ //we create a struct type for chromossomes
  	std::string bits;
