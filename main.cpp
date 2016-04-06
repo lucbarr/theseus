@@ -2,9 +2,7 @@
 #include <fstream>
 #include <string>
 
-struct Pos{
-	int x,y;
-};
+#include "util.h"
 
 using namespace std;
 
@@ -34,8 +32,5 @@ int main (){
 		}
 		i++;
 	}
-	printMap(map, i);
-	cout << startpos.x << " , " << startpos.y << endl;
-	cout << endpos.x << " , " << endpos.y << endl;
 }
 
