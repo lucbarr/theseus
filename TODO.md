@@ -1,0 +1,2 @@
+- [ ] Enhance fitness
+- [ ] Optmize constants
