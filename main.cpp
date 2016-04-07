@@ -42,14 +42,14 @@ int main (){
 		population[i].bits = generateRandomBits(CHROMO_LENGTH);
 	}
 	int popPopper;
+	cout << pathGoneDiff(map);
 	while (true){
 		totalFitness = fitnessSum(population);
 		index = checkSolve(population);
-		if (population[index].fitness >  ){
+		if (population[index].fitness > 990){
 			break;
 		}
 		system ("clear");
-		printPath(map, population[index].bits);
 		usleep(16666);
 		ChromoType tempPop[POP_SIZE];
 		popPopper=0;
@@ -60,18 +60,16 @@ int main (){
 			mutate(child1);
 			mutate(child2);
 			tempPop[popPopper].bits = child1;
-			tempPop[popPopper++].fitness = evaluateFitness(map, child1);
+			tempPop[popPopper++].fitness = printPath(map, child1);
 			tempPop[popPopper].bits = child2;
-			tempPop[popPopper++].fitness = evaluateFitness(map, child2);
-		}	
+			tempPop[popPopper++].fitness = printPath(map, child2);
+			system("clear");
+		}
 		for (int i=0;i<POP_SIZE;++i){
 			population[i].bits = tempPop[i].bits;
 			population[i].fitness = tempPop[i].fitness;
 		}
 	}
-	
 	printPath(map, population[index].bits);
-	cout << population[index].fitness << endl;
-	map.printMap();
-
+	return 0;
 }

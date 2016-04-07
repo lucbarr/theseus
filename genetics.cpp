@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include <string.h>
+#include <algorithm>
 
 #include "util.h"
 #include "map.h"
@@ -49,7 +50,6 @@ void mutate(std::string &bits){
 /*Crossover function chooses a random position on a chromossome and chrosses two chromossomes.*/
 
 void crossover(std::string &child1,std::string &child2){
-	srand(time(NULL));
 	if(RANDOM_NUM> CROSSOVER_RATE){
 		int crosspoint = (RANDOM_NUM)*(CHROMO_LENGTH);
 		std::string temp1;
@@ -75,7 +75,7 @@ std::string generateRandomBits(int length){
 	} //this function should be casted the fewer.
 	return bits;
 }
-/*
+
 float evaluateFitness (Map map, std::string bits){
 	Pos individual_pos = map.getStartPos();
 	int current_gene = 0;
@@ -87,14 +87,13 @@ float evaluateFitness (Map map, std::string bits){
 		if (map.isValid(direction)){
 			individual_pos.x = direction.x;
 			individual_pos.y = direction.y;
-			steps_counter++;
 		}
 		if (map.isEnd(individual_pos)){
 			return 999.0f;
 		}
 	}
-	return (1/(distSqr(individual_pos,map.getEndPos())));
-}*/
+	return pathGoneDiff(map);
+}
 
 float fitnessSum(ChromoType* population){
 	float result = 0.0;
@@ -182,7 +181,8 @@ float printPath(Map map, std::string bits){
 			map.map_[individual_pos.x].at(individual_pos.y) = 'x';
 		}
 		if (map.isEnd(individual_pos)){
-			return 999.0f;
+			map.printMap();
+			return 997.0f;
 		}
 	}
 	map.printMap();
@@ -194,14 +194,33 @@ float pathGoneDiff (Map map){
 	int x_counter = 0;
 	int dot_counter = 0;
 	for (int i = 0 ; i < map.getNofRows() ; ++i ){
-		for (int j = 0 ; j < map.getNofColumns() ; ++j){
+		for (int j = 0 ; j < map.map_[i].length() ; ++j){
 			if (map.map_[i].at(j) == 'x'){
 				x_counter++;
 			}
-			if (map.map_[i].at(j) == '.'){
+			if (map.map_[i].at(j) == '.' ){
 				dot_counter++;
 			}
 		}
 	}
-	return ( dot_counter - x_counter );
+	return ( x_counter - dot_counter);
+}
+
+void printChromo(Map map, std::string bits){
+	Pos individual_pos = map.getStartPos();
+	int current_gene = 0;
+	Pos direction;
+	for (int i = 0 ; i < CHROMO_LENGTH ; i+=GENE_LENGTH){
+		current_gene = bin2Dec(bits.substr(i,GENE_LENGTH));
+		direction.x = decodeDirection(current_gene).x + individual_pos.x;
+		direction.y = decodeDirection(current_gene).y + individual_pos.y;
+		if (map.isValid(direction)){
+			individual_pos.x = direction.x;
+			individual_pos.y = direction.y;
+			std::cout << dirSymbol(current_gene) << ", " ;
+		}
+		if (map.isEnd(individual_pos)){
+			break;
+		}
+	}
 }

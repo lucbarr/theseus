@@ -26,11 +26,12 @@ public:
 	bool isEnd (Pos position) { return ((position.x == endpos_.x) && (position.y == endpos_.y)); }
 	bool isStart (Pos position) { return ((position.x == startpos_.x) && (position.y == startpos_.y)); }
 	bool isValid (Pos position) {
+		if (map_[position.x].at(position.y) == '#') { return false; }
 		return ((map_[position.x].at(position.y) == '.') || (map_[position.x].at(position.y) == 'x') || map_[position.x].at(position.y) == '@' );
 	}
 
 	int getNofRows() { return n_of_rows_; }
-	int getNofColumns() { return n_of_columns_ }
+	int getNofColumns() { return n_of_columns_; }
 	Pos getStartPos() { return startpos_; }
 	Pos getEndPos() { return endpos_; }	
 
