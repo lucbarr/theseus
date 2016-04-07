@@ -75,9 +75,8 @@ std::string generateRandomBits(int length){
 	} //this function should be casted the fewer.
 	return bits;
 }
-
+/*
 float evaluateFitness (Map map, std::string bits){
-	int steps_counter = 0;
 	Pos individual_pos = map.getStartPos();
 	int current_gene = 0;
 	Pos direction;
@@ -94,8 +93,8 @@ float evaluateFitness (Map map, std::string bits){
 			return 999.0f;
 		}
 	}
-	return (1/distSqr(individual_pos,map.getEndPos()));
-}
+	return (1/(distSqr(individual_pos,map.getEndPos())));
+}*/
 
 float fitnessSum(ChromoType* population){
 	float result = 0.0;
@@ -169,7 +168,7 @@ int checkSolve(ChromoType* population){
 	return higher_index;
 }
 
-void printPath(Map map, std::string bits){
+float printPath(Map map, std::string bits){
 	Pos individual_pos = map.getStartPos();
 	int current_gene = 0;
 	Pos direction;
@@ -183,8 +182,26 @@ void printPath(Map map, std::string bits){
 			map.map_[individual_pos.x].at(individual_pos.y) = 'x';
 		}
 		if (map.isEnd(individual_pos)){
-			break;
+			return 999.0f;
 		}
 	}
 	map.printMap();
+	return pathGoneDiff(map);
+
+}
+
+float pathGoneDiff (Map map){
+	int x_counter = 0;
+	int dot_counter = 0;
+	for (int i = 0 ; i < map.getNofRows() ; ++i ){
+		for (int j = 0 ; j < map.getNofColumns() ; ++j){
+			if (map.map_[i].at(j) == 'x'){
+				x_counter++;
+			}
+			if (map.map_[i].at(j) == '.'){
+				dot_counter++;
+			}
+		}
+	}
+	return ( dot_counter - x_counter );
 }

@@ -42,17 +42,15 @@ int main (){
 		population[i].bits = generateRandomBits(CHROMO_LENGTH);
 	}
 	int popPopper;
-	while (true){/*
-		for (int i = 0 ; i < POP_SIZE ; ++i){
-			population[i].fitness = evaluateFitness(map, population[i].bits);
-		}*/
+	while (true){
 		totalFitness = fitnessSum(population);
 		index = checkSolve(population);
-		if (population[index].fitness > 1 ){
+		if (population[index].fitness >  ){
 			break;
 		}
 		system ("clear");
 		printPath(map, population[index].bits);
+		usleep(16666);
 		ChromoType tempPop[POP_SIZE];
 		popPopper=0;
 		while (popPopper < POP_SIZE){

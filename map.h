@@ -30,6 +30,7 @@ public:
 	}
 
 	int getNofRows() { return n_of_rows_; }
+	int getNofColumns() { return n_of_columns_ }
 	Pos getStartPos() { return startpos_; }
 	Pos getEndPos() { return endpos_; }	
 
