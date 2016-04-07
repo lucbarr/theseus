@@ -31,7 +31,7 @@ public:
 
 	int getNofRows() { return n_of_rows_; }
 	Pos getStartPos() { return startpos_; }
-	Pos getEndPos() { return endpos_; }
+	Pos getEndPos() { return endpos_; }	
 
 	void printMap(){
 	for (int j=0 ; j < n_of_rows_ ; ++j){

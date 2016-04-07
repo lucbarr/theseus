@@ -42,11 +42,10 @@ int main (){
 		population[i].bits = generateRandomBits(CHROMO_LENGTH);
 	}
 	int popPopper;
-	int n = 50;
-	while (n){
+	while (true){/*
 		for (int i = 0 ; i < POP_SIZE ; ++i){
 			population[i].fitness = evaluateFitness(map, population[i].bits);
-		}
+		}*/
 		totalFitness = fitnessSum(population);
 		index = checkSolve(population);
 		if (population[index].fitness > 1 ){
@@ -63,15 +62,14 @@ int main (){
 			mutate(child1);
 			mutate(child2);
 			tempPop[popPopper].bits = child1;
-			tempPop[popPopper++].fitness = 0.0f;
+			tempPop[popPopper++].fitness = evaluateFitness(map, child1);
 			tempPop[popPopper].bits = child2;
-			tempPop[popPopper++].fitness = 0.0f;
+			tempPop[popPopper++].fitness = evaluateFitness(map, child2);
 		}	
 		for (int i=0;i<POP_SIZE;++i){
 			population[i].bits = tempPop[i].bits;
 			population[i].fitness = tempPop[i].fitness;
 		}
-	n--;
 	}
 	
 	printPath(map, population[index].bits);

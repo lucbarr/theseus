@@ -94,7 +94,7 @@ float evaluateFitness (Map map, std::string bits){
 			return 999.0f;
 		}
 	}
-	return (1/(steps_counter*distSqr(individual_pos,map.getEndPos())));
+	return (1/distSqr(individual_pos,map.getEndPos()));
 }
 
 float fitnessSum(ChromoType* population){
